@@ -3,7 +3,7 @@ import QtQuick
 
 // Copyright (C) 2017 The Qt Company Ltd.
 // SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
-
+import DelayAudioFeedback 1.0
 import QtQuick.Controls
 import QtQuick.Layouts
 
@@ -32,6 +32,7 @@ Window {
             property int duration: 250
             property alias text: listenBtnLabel.text
             property bool listeningEnabled: false
+            property DelayAudioFeedback daf: DelayAudioFeedback {}
 
             MouseArea {
                 anchors.fill: parent
@@ -40,8 +41,11 @@ Window {
 
                     if (parent.listeningEnabled == true) {
                         listenBtnLabel.text = "Stop"
+                        parent.daf.setStatus("stopped")
                     } else {
                         listenBtnLabel.text = "Start"
+                        parent.daf.setStatus("started")
+                        console.log(parent.daf.status)  
                     }
                 }
 
@@ -136,9 +140,6 @@ Window {
                     }
                 }
             }
-
-
-
         }
     }
 
