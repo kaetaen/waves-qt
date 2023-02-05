@@ -42,10 +42,11 @@ Window {
                     if (parent.listeningEnabled == true) {
                         listenBtnLabel.text = "Stop"
                         parent.daf.setStatus("stopped")
+                        parent.daf.startPulseAudio()
                     } else {
                         listenBtnLabel.text = "Start"
-                        parent.daf.setStatus("started")
-                        console.log(parent.daf.status)  
+                        parent.daf.setStatus("started") 
+                        parent.daf.stopPulseAudio()
                     }
                 }
 

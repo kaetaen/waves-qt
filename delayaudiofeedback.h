@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QProcess>
 
 class DelayAudioFeedback : public QObject
 {
@@ -11,10 +12,14 @@ class DelayAudioFeedback : public QObject
 public:
     Q_INVOKABLE void setStatus(const QString &currentStatus);
     QString status() const;
+    Q_INVOKABLE void startPulseAudio();
+    Q_INVOKABLE void stopPulseAudio();
 signals:
     void statusChanged();
 private:
     QString dafStatus;
+    QProcess* m_pulseProcessStart;
+    QProcess* m_pulseProcessStop;
 };
 
 #endif // DELAYAUDIOFEEDBACK
