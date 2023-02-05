@@ -12,6 +12,9 @@ Window {
     height: 480
     visible: true
     title: qsTr("Waves")
+    onClosing: {
+        recordingButton.daf.stopPulseAudio()
+    }
 
     Rectangle {
         id: mainscreen

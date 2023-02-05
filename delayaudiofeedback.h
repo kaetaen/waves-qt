@@ -19,7 +19,6 @@ signals:
 private:
     QString dafStatus;
     QProcess* m_pulseProcessStart;
-    QProcess* m_pulseProcessStop;
 };
 
 #endif // DELAYAUDIOFEEDBACK
