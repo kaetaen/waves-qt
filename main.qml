@@ -29,17 +29,32 @@ Window {
             border.color: "#ffffff"
             anchors.centerIn: parent
 
-
             property int duration: 250
-            property alias text: label.text
-        //! [0]
+            property alias text: listenBtnLabel.text
+            property bool listeningEnabled: false
+
             MouseArea {
                 anchors.fill: parent
-                onClicked: root.clicked()
                 onPressed: {
-                    glow.visible = true
-                    animation1.start()
-                    animation2.start()
+                    parent.listeningEnabled = !parent.listeningEnabled
+
+                    if (parent.listeningEnabled == true) {
+                        listenBtnLabel.text = "Stop"
+                    } else {
+                        listenBtnLabel.text = "Start"
+                    }
+                }
+
+                Timer {
+                   id: timer
+                   interval: 1000
+                   running: recordingButton.listeningEnabled
+                   repeat: true
+                   onTriggered: function (){
+                       glow.visible = true
+                       animation1.start()
+                       animation2.start()
+                   }
                 }
             }
         //! [0]
@@ -58,20 +73,18 @@ Window {
             }
 
             Label {
-                id: label
+                id: listenBtnLabel
                 x: 300
                 y: 300
-                text: "Listening"
+                text: "Start"
                 anchors.centerIn: parent
                 color: "#f8f8f2"
-                font.family: Constants.fontFamily
                 font.pixelSize: 28
             }
 
             PropertyAnimation {
                 target: glow
                 id: animation1
-                duration: root.duration
                 loops: 1
                 from: 1.05
                 to: 1.2
@@ -83,7 +96,6 @@ Window {
                 SequentialAnimation {
                     PropertyAnimation {
                         target: glow
-                        duration: root.duration
                         loops: 1
                         from: 0.2
                         to: 1.0
@@ -91,7 +103,6 @@ Window {
                     }
                     PropertyAnimation {
                         target: glow
-                        duration: root.duration
                         loops: 1
                         from: 1.0
                         to: 0.0
@@ -118,7 +129,6 @@ Window {
 
                     PropertyAnimation {
                         target: glow
-                        duration: root.duration
                         loops: 1
                         from: 20
                         to: 10
