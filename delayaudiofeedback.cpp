@@ -33,6 +33,7 @@ void DelayAudioFeedback::stopPulseAudio()
     arguments << "unload-module" << "module-loopback";
     QProcess *process = new QProcess(this);
     process->start(program, arguments);
+    process->waitForFinished();
     m_pulseProcessStart->kill();
 }
 

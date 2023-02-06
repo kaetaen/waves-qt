@@ -12,8 +12,6 @@ Window {
     title: qsTr("Waves")
     onClosing: {
         listeningButton.daf.stopPulseAudio()
-        // Caso o pulseaudio reinicie o processo, mata novamente
-        listeningButton.daf.stopPulseAudio()
     }
     Component.onCompleted: {
         const pulseaudioInstalled = listeningButton.daf.verifyPulseAudioInstallation()
