@@ -1,8 +1,4 @@
 import QtQuick
-
-
-// Copyright (C) 2017 The Qt Company Ltd.
-// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
 import DelayAudioFeedback 1.0
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -15,12 +11,12 @@ Window {
     visible: true
     title: qsTr("Waves")
     onClosing: {
-        recordingButton.daf.stopPulseAudio()
+        listeningButton.daf.stopPulseAudio()
         // Caso o pulseaudio reinicie o processo, mata novamente
-        recordingButton.daf.stopPulseAudio()
+        listeningButton.daf.stopPulseAudio()
     }
     Component.onCompleted: {
-        const pulseaudioInstalled = recordingButton.daf.verifyPulseAudioInstallation()
+        const pulseaudioInstalled = listeningButton.daf.verifyPulseAudioInstallation()
         
         if (!pulseaudioInstalled) {
             errorDialog.visible = true
@@ -33,7 +29,7 @@ Window {
         color: "#282a36"
 
         Rectangle {
-            id: recordingButton
+            id: listeningButton
             signal clicked
             width: 300
             height: 300
@@ -58,18 +54,18 @@ Window {
                         parent.daf.setStatus("stopped")
                         parent.daf.startPulseAudio()
 
-                        recordingButton.width = 280
-                        recordingButton.height = 280
-                        recordingButton.radius = 200
+                        listeningButton.width = 280
+                        listeningButton.height = 280
+                        listeningButton.radius = 200
 
                     } else {
                         listenBtnLabel.text = "Start"
                         parent.daf.setStatus("started") 
                         parent.daf.stopPulseAudio()
 
-                        recordingButton.width = 300
-                        recordingButton.height = 300
-                        recordingButton.radius = 200
+                        listeningButton.width = 300
+                        listeningButton.height = 300
+                        listeningButton.radius = 200
 
                     }
                 }
@@ -77,7 +73,7 @@ Window {
                 Timer {
                    id: timer
                    interval: 1000
-                   running: recordingButton.listeningEnabled
+                   running: listeningButton.listeningEnabled
                    repeat: true
                    onTriggered: function (){
                        glow.visible = true
