@@ -14,6 +14,8 @@ Window {
     title: qsTr("Waves")
     onClosing: {
         recordingButton.daf.stopPulseAudio()
+        // Caso o pulseaudio reinicie o processo, mata novamente
+        recordingButton.daf.stopPulseAudio()
     }
 
     Rectangle {

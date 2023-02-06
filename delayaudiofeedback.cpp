@@ -27,5 +27,10 @@ void DelayAudioFeedback::startPulseAudio()
 
 void DelayAudioFeedback::stopPulseAudio()
 { 
+    QString program = "/usr/bin/pactl";
+    QStringList arguments;
+    arguments << "unload-module" << "module-loopback";
+    QProcess *process = new QProcess(this);
+    process->start(program, arguments);
     m_pulseProcessStart->kill();
 }
