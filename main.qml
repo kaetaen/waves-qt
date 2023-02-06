@@ -6,8 +6,21 @@ import QtQuick
 import DelayAudioFeedback 1.0
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs 
 
 Window {
+
+MessageDialog {
+    visible: true
+    id: messageDialog
+    title: "PulseAudio not installed"
+    text: "Please install PulseAudio for the program to function correctly"
+    onAccepted: {
+        Qt.quit()
+    }
+}
+
+    id: root
     width: 640
     height: 480
     visible: true
@@ -28,7 +41,7 @@ Window {
             signal clicked
             width: 300
             height: 300
-            color: "#00000000"
+            color: "#50fa7b"
             radius: 200
             scale: 1.05
             border.color: "#ffffff"
@@ -48,10 +61,20 @@ Window {
                         listenBtnLabel.text = "Stop"
                         parent.daf.setStatus("stopped")
                         parent.daf.startPulseAudio()
+
+                        recordingButton.width = 280
+                        recordingButton.height = 280
+                        recordingButton.radius = 200
+
                     } else {
                         listenBtnLabel.text = "Start"
                         parent.daf.setStatus("started") 
                         parent.daf.stopPulseAudio()
+
+                        recordingButton.width = 300
+                        recordingButton.height = 300
+                        recordingButton.radius = 200
+
                     }
                 }
 
@@ -76,7 +99,7 @@ Window {
 
                 width: 300
                 height: 300
-                color: "#00000000"
+                color: "#bd93f9"
                 radius: 150
                 scale: 1.05
                 border.color: "#ffffff"
@@ -90,6 +113,7 @@ Window {
                 anchors.centerIn: parent
                 color: "#f8f8f2"
                 font.pixelSize: 28
+                font.bold: true
             }
 
             PropertyAnimation {
@@ -148,5 +172,4 @@ Window {
             }
         }
     }
-
 }
