@@ -4,7 +4,8 @@ project(waves VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(Qt6_DIR "/home/kaetaen/Qt/6.4.2/gcc_64/lib/cmake/Qt6")
+
+set(Qt6_DIR "$ENV{QT_DIR}/6.4.2/gcc_64/lib/cmake/Qt6")
 
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
