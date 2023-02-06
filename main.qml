@@ -9,17 +9,6 @@ import QtQuick.Layouts
 import QtQuick.Dialogs 
 
 Window {
-
-MessageDialog {
-    visible: true
-    id: messageDialog
-    title: "PulseAudio not installed"
-    text: "Please install PulseAudio for the program to function correctly"
-    onAccepted: {
-        Qt.quit()
-    }
-}
-
     id: root
     width: 640
     height: 480
@@ -29,6 +18,13 @@ MessageDialog {
         recordingButton.daf.stopPulseAudio()
         // Caso o pulseaudio reinicie o processo, mata novamente
         recordingButton.daf.stopPulseAudio()
+    }
+    Component.onCompleted: {
+        const pulseaudioInstalled = recordingButton.daf.verifyPulseAudioInstallation()
+        
+        if (!pulseaudioInstalled) {
+            errorDialog.visible = true
+        }
     }
 
     Rectangle {
@@ -170,6 +166,16 @@ MessageDialog {
                     }
                 }
             }
+        }
+    }
+
+    MessageDialog {
+        visible: false
+        id: errorDialog
+        title: "PulseAudio not installed"
+        text: "Please install PulseAudio for the program to function correctly"
+        onAccepted: {
+            Qt.quit()
         }
     }
 }

@@ -1,6 +1,7 @@
 #include "delayaudiofeedback.h"
 #include <QProcess>
 #include <QCloseEvent>
+#include <QFile> 
 
 void DelayAudioFeedback::setStatus(const QString &currentStatus)
 {
@@ -33,4 +34,12 @@ void DelayAudioFeedback::stopPulseAudio()
     QProcess *process = new QProcess(this);
     process->start(program, arguments);
     m_pulseProcessStart->kill();
+}
+
+bool DelayAudioFeedback::verifyPulseAudioInstallation(){
+    if(QFile::exists("/usr/bin/pactl")) {
+        return true;
+    } else {
+        return false;
+    }
 }

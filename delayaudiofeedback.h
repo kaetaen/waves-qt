@@ -14,6 +14,7 @@ public:
     QString status() const;
     Q_INVOKABLE void startPulseAudio();
     Q_INVOKABLE void stopPulseAudio();
+    Q_INVOKABLE bool verifyPulseAudioInstallation();
 signals:
     void statusChanged();
 private:
