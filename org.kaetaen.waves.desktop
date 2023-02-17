@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Exec="/usr/bin/appwaves" &
+Name=Waves
+GenericName=Stuttering Helper
+Icon=/usr/share/icons/wave-sound.png
+Terminal=false
+Categories=Development;IDE;Qt;

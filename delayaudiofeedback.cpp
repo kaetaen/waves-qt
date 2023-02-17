@@ -20,7 +20,7 @@ void DelayAudioFeedback::startPulseAudio()
 {
     QString program = "/usr/bin/pactl";
     QStringList arguments;
-    arguments << "load-module" << "module-loopback" << "latency_msec=1";
+    arguments << "load-module" << "module-loopback" << "latency_msec=500";
     
     m_pulseProcessStart = new QProcess(this);
     m_pulseProcessStart->start(program, arguments);
